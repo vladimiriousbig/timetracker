@@ -1,0 +1,12 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    url: jdbc:postgresql://localhost:5432/timetracker
+    username: postgres
+    password: Timetracker123
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+
