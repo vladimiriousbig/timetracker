@@ -1,4 +1,4 @@
-package com.ispu.timetracker;
+package com.vladimir.timetracker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
