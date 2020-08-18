@@ -1,0 +1,114 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Vladimir Orlov
+      changes:
+      - createTable:
+          tableName: tt_users
+          columns:
+          - column:
+              name: id
+              type: bigint
+              autoIncrement: true
+              constraints:
+                primaryKey: true
+                primaryKeyName: pk_public_tt_users
+                nullable: false
+          - column:
+              name: login
+              type: varchar(30)
+              constraints:
+                nullable: false
+                unique: true
+                uniqueConstraintName: uq_public_tt_users_login
+          - column:
+              name: hash_password
+              # Максимальная длина хеша BCrypt
+              type: character(60)
+              constraints:
+                nullable: false
+          - column:
+              name: email
+              # Максимальная длина email
+              # https://tools.ietf.org/html/rfc5321#section-4.5.3
+              type: varchar(254)
+              constraints:
+                nullable: false
+                unique: true
+                uniqueConstraintName: uq_public_tt_users_email
+          - column:
+              name: phone_number
+              # https://en.wikipedia.org/wiki/Telephone_numbering_plan#Variable-length_dialing - максимум 15
+              type: varchar(15)
+              constraints:
+                nullable: true
+          - column:
+              name: name
+              type: varchar(60)
+              constraints:
+                nullable: true
+          - column:
+              name: photo_url
+              type: text
+              constraints:
+                nullable: true
+      - createTable:
+          tableName: tt_categories
+          columns:
+          - column:
+              name: id
+              type: bigint
+              constraints:
+                primaryKey: true
+                primaryKeyName: pk_public_tt_categories
+                nullable: false
+          - column:
+              name: name
+              type: varchar(50)
+              constraints:
+                nullable: false
+      - createTable:
+          tableName: tt_tasks
+          columns:
+          - column:
+              name: id
+              type: bigint
+              constraints:
+                primaryKey: true
+                primaryKeyName: pk_public_tt_tasks
+                nullable: false
+          - column:
+              name: name
+              type: varchar(100)
+              constraints:
+                nullable: false
+          - column:
+              name: start_timestamp
+              type: timestamp
+              constraints:
+                nullable: false
+          - column:
+              name: end_timestamp
+              type: timestamp
+              constraints:
+                nullable: false
+          - column:
+              name: id_user
+              type: bigint
+              constraints:
+                foreignKeyName: fk_public_tt_tasks_tt_users
+                references: tt_users(id)
+                nullable: false
+          - column:
+              name: id_category
+              type: bigint
+              constraints:
+                foreignKeyName: fk_public_tt_tasks_tt_categories
+                references: tt_categories(id)
+                nullable: true
+      - addAutoIncrement:
+          tableName: tt_categories
+          columnName: id
+      - addAutoIncrement:
+          tableName: tt_tasks
+          columnName: id

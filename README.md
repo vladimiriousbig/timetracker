@@ -1,1 +1,1 @@
-# team-timetracker
+# timetracker

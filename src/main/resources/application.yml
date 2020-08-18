@@ -1,3 +1,5 @@
+api:
+  prefix: /api
 spring:
   jpa:
     properties:
@@ -8,5 +10,4 @@ spring:
     username: postgres
     password: Timetracker123
   liquibase:
-    change-log: classpath:db/changelog/db.changelog-master.xml
-
+    change-log: classpath:db/changelog/db.changelog-master.yaml
